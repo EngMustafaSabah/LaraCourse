@@ -28,6 +28,7 @@
 
 ## APIs
 
+  - yourUrl/login  add  email is ('eng.m.sabah@gmail.com') password is ('password') in header in postman or other app to get the Token to connect any other APIs below
   - yourUrl/course  it is get method type to be get all course with Categories related each course 
   - yourUrl/course/(id parmeter)  it is get method type to be get a one course  with Categories related this course 
   - yourUrl/category  it is get method type to be get all category with Courses related each Categories 
