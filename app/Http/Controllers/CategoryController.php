@@ -2,25 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Redirect;
 use App\Models\Category;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
     public function indexx()
     {
-        return 44 ;
+        return 44;
     }
-    public function index(){
+
+    public function index()
+    {
         // return Inertia::render('Course', [
         //     'courses' => Course::paginate()
         // ]);
 
         request()->validate([
             'direction' => ['in:asc,desc'],
-            'field' => ['in:name,city']
+            'field'     => ['in:name,city'],
         ]);
 
         $query = Category::query();
@@ -35,7 +36,7 @@ class CategoryController extends Controller
 
         return Inertia::render('Category', [
             'Categories' => $query->paginate(3)->withQueryString(),
-            'filters' => request()->all(['search', 'field', 'direction'])
+            'filters'    => request()->all(['search', 'field', 'direction']),
         ]);
     }
     // AddCategory
@@ -43,26 +44,23 @@ class CategoryController extends Controller
     public function addCategory()
     {
         return Inertia::render('AddCategory', [
-          'Categor' => Category::all(),
+            'Categor' => Category::all(),
         ]);
     }
 
     public function store(Request $request)
     {
-
         // $this->validate($request, [
         //     'name' => 'required',
         //     'active' => 'required',
         // ]);
-        
+
         Category::create(
             $this->validate($request, [
                 '*' => 'required',
             ])
-        );  
+        );
 
         return redirect('addCategory');
     }
-
-    
 }

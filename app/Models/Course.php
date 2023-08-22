@@ -5,14 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Category;
-
 
 class Course extends Model
 {
-    use HasFactory;  
+    use HasFactory;
     use SoftDeletes;
-    
+
     protected $fillable = [
         'name',
         'description',
@@ -22,10 +20,10 @@ class Course extends Model
         'hours',
         'category_id',
         'levels',
-        'user_id'
+        'user_id',
     ];
 
-    public  function category()
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }

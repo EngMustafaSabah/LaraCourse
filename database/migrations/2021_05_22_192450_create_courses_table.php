@@ -19,7 +19,7 @@ class CreateCoursesTable extends Migration
             $table->mediumText('description');
             $table->integer('rating');
             $table->integer('views');
-            $table->enum('levels', ['beginner','immediat','high']);
+            $table->enum('levels', ['beginner', 'immediat', 'high']);
             $table->integer('hours');
             $table->boolean('active');
             $table->foreignId('user_id')->constrained();
