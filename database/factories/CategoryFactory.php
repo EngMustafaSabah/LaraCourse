@@ -2,11 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Team;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
-use Laravel\Jetstream\Features;
 
 class CategoryFactory extends Factory
 {
@@ -25,7 +22,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'name'   => $this->faker->name,
             'active' => $this->faker->boolean,
         ];
     }

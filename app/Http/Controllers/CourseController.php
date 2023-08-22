@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Course;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class CourseController extends Controller
 {
-
-    public function index(){
+    public function index()
+    {
         // return Inertia::render('Course', [
         //     'courses' => Course::paginate()
         // ]);
 
         request()->validate([
             'direction' => ['in:asc,desc'],
-            'field' => ['in:name,city']
+            'field'     => ['in:name,city'],
         ]);
 
         $query = Course::query();
@@ -24,7 +24,6 @@ class CourseController extends Controller
         if (request('search')) {
             $query->where('name', 'LIKE', '%'.request('search').'%')
             ->orwhere('levels', 'LIKE', '%'.request('search').'%');
-
         }
 
         if (request()->has(['field', 'direction'])) {
@@ -33,14 +32,15 @@ class CourseController extends Controller
 
         return Inertia::render('Course', [
             'courses' => $query->paginate(3)->withQueryString(),
-            'filters' => request()->all(['search', 'field', 'direction'])
+            'filters' => request()->all(['search', 'field', 'direction']),
         ]);
     }
 
-    public function search(){
+    public function search()
+    {
         request()->validate([
             'direction' => ['in:asc,desc'],
-            'field' => ['in:name,city']
+            'field'     => ['in:name,city'],
         ]);
 
         $query = Course::query();
@@ -56,24 +56,24 @@ class CourseController extends Controller
 
         return Inertia::render('Dashboard', [
             'courses' => $query->paginate(6)->withQueryString(),
-            'filters' => request()->all(['search', 'field', 'direction'])
+            'filters' => request()->all(['search', 'field', 'direction']),
         ]);
     }
 
     public function addCourse()
     {
         return Inertia::render('AddCourse', [
-          'Course' => Course::all(),
+            'Course' => Course::all(),
         ]);
     }
 
     public function store(Request $request)
     {
         $request->request->add([
-            'user_id' => auth()->user()->id,
+            'user_id'     => auth()->user()->id,
             'category_id' => 2,
         ]);
-        Course::create($this->validate($request, ['*' => 'required',])); 
+        Course::create($this->validate($request, ['*' => 'required']));
 
         return redirect('addCourse');
     }
@@ -82,6 +82,7 @@ class CourseController extends Controller
     {
         if ($request->id) {
             Course::destroy($request->id);
+
             return redirect('courses');
         }
     }
